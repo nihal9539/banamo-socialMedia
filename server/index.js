@@ -6,7 +6,7 @@ import cors from "cors"
 import AuthRoute from "./Routes/AuthRoute.js"
 import PostRoute from "./Routes/PostRoute.js"
 
-// import CommentRoute from "./Routes/CommentRoute.js"
+import CommentRoute from "./Routes/CommentRoute.js"
 
 // Router
 
@@ -34,3 +34,4 @@ mongoose.connect(process.env.MONGO_DB)
 
 app.use('/auth',AuthRoute)
 app.use('/post',PostRoute)
+app.use('/comments',CommentRoute)

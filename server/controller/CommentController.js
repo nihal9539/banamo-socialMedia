@@ -6,6 +6,7 @@ import CommentModel from "../model/commentModel.js";
  export const createComment = async (req, res) => {
     try {
         const { comment, postId ,userId} = req.body;
+        console.log(req.body);
 
         // Create a new comment
         const comments = new CommentModel({
@@ -17,7 +18,7 @@ import CommentModel from "../model/commentModel.js";
         // Save the comment to the database
         await comments.save();
 
-        res.status(200).json(comment);
+        res.status(200).json(comments);
     } catch (error) {
         console.error('Error creating comment:', error);
         res.status(500).json({ error: 'Could not create comment' });
