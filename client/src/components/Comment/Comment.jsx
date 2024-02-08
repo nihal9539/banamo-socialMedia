@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { getComments } from '../../api/CommentRequest'
 
-const Comment = ({postId}) => {
+const Comment = ({ postId }) => {
     console.log(postId)
-    const [ comments,setComments] = useState([])
+    const [comments, setComments] = useState([])
 
-    useEffect(()=>{
-        getComments(postId).then((res)=>{
+    useEffect(() => {
+        getComments(postId).then((res) => {
             setComments(res.data)
 
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
         })
-        
-    },[postId])
+
+    }, [postId])
     return (
         <div>
             <div style={{ background: "#0A0A0A" }} className={`h-24 grid break-all  overflow-scroll rounded-sm bg-gray-800 p-2`}>
                 <div className=' space-y-2'>
-                   {comments.map((comment)=>(
-                     <p> {comment?.comment}</p>
-                   
-                   ))}
+                    {comments.length == 0 ? "No comment" : comments.map((comment, index) => (
+                        <p key={index}> {comment?.comment}</p>
+                    ))}
                 </div>
             </div>
 

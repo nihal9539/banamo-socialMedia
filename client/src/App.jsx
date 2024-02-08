@@ -5,8 +5,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home/Home';
 import Layout from './pages/Layout/Layout';
-import Upload from './components/imageupload/upload';
 import "./App.css"
+import UserPosts from './components/UserPosts/UserPosts';
 
 
 const user = JSON.parse(localStorage.getItem('user'))
@@ -19,8 +19,8 @@ function App() {
         <Route path='/auth' element={user? <Navigate to={"/"} />:<Auth />} />
         <Route element={<Layout />}  >
           <Route path='/' element={user ? <Home /> : <Navigate to={"/auth"} />}/>
+          <Route path='/user' element={user ? <UserPosts /> : <Navigate to={"/auth"} />}/>
         </Route>
-        <Route path='/img' element={<Upload/>}></Route>
       </Routes>
       <ToastContainer />
     </BrowserRouter>

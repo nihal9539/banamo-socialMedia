@@ -86,7 +86,7 @@ const Sidebar = () => {
                                 </div>
                             </li>
                             <li>
-                                <div  className="flex items-center p-2 py-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 group">
+                                <div onClick={() => navigate('/user')}  className="flex items-center p-2 py-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 group">
                                     <FaUserCircle size={30} />
                                     <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
                                 </div>

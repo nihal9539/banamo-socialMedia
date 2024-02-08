@@ -3,21 +3,20 @@ import { getAllPost } from '../../api/PostRequest'
 import Posts from '../../components/Posts/Posts'
 
 const Home = () => {
-    const [imageArraay,setImageArraay] =useState([])
+    const [post,setPost] =useState([])
     useEffect(()=>{
         getAllPost().then((res)=>{
-            setImageArraay(res.data)
+            setPost(res.data)
         }).catch((err)=>{
             console.log(err);
         })
 
     },[])
-    console.log(imageArraay);
   return (
     <div className=' px-14 p-4 gap-6 sm:ml-64 h-screen overflow-scroll flex flex-col' >
-      {imageArraay.map((data)=>{
+      {post.map((data,index)=>{
         return(
-            <Posts data={data}/>
+            <Posts key={index} data={data}/>
         )
       })}
     </div>

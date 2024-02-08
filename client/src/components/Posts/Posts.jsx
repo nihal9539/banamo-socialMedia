@@ -11,14 +11,20 @@ import { LuSend } from "react-icons/lu";
 import { IoMdSend } from "react-icons/io";
 import { createComment } from '../../api/CommentRequest';
 import Comment from '../Comment/Comment';
+import { SlOptionsVertical } from "react-icons/sl";
+import Option from '../Option/Option';
 
 
 
 
-const Posts = ({ data }) => {
+
+const Posts = ({ data, options }) => {
     const [liking, setLiking] = useState(false)
     const [accordian, setAccordian] = useState(false)
     const [comment, setcomment] = useState("")
+    const [optionOpen, setOptionOpen] = useState("")
+
+
 
     const user = JSON.parse(localStorage.getItem('user'))
 
@@ -30,41 +36,47 @@ const Posts = ({ data }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        const  commentss ={
-            userId : user.user._id,
-            postId:data._id,
-            comment:comment
+        const commentss = {
+            userId: user.user._id,
+            postId: data._id,
+            comment: comment
         }
-       createComment(commentss).then((res)=>{
-        console.log(res)
-        setcomment("")
-       }).catch((err)=>{
-        console.log(err);
-       })
+        createComment(commentss).then((res) => {
+            console.log(res)
+            setcomment("")
+        }).catch((err) => {
+            console.log(err);
+        })
     }
-
+console.log(optionOpen);
 
     return (
         <div style={{ background: "#161618" }} className='w-11/12 p-6 self-center rounded-lg flex flex-col gap-4 justify-center bg-transparent backdrop-blur-lg text-white '>
             <img src={data.image} className='h-96 rounded-md border' width={"100%"} alt="" />
             <div className='flex flex-col gap-1'>
 
-                <div className='flex flex-col w-fit items-start gap-1'>
-                    <div className='flex flex-row gap-4 w-fit pl-1 items-center'>
-                        <div onClick={handleLike}> {liking ? <FcLike size={28} /> : <FaRegHeart size={28} />} </div>
-                        <BiCommentDetail onClick={handleCommentOpen} size={28} />
-                        <LuSend size={28} />
+                <div className='flex flex-col  items-start gap-1'>
+                    <div className=' flex flex-row w-full pl-1 justify-between'>
+                        <div className='flex flex-row gap-4'>
+                            <div onClick={handleLike}> {liking ? <FcLike size={28} /> : <FaRegHeart size={28} />} </div>
+                            <BiCommentDetail onClick={handleCommentOpen} size={28} />
+                            <LuSend size={28} />
+                        </div>
+                        <div>
+                            <SlOptionsVertical size={20} className='relative' onClick={(e)=>setOptionOpen(prev=>!prev)}/>
+                           {optionOpen ? <Option/> : ""}
+                        </div>
                     </div>
                     <p className='text-xs'>5 Likes</p></div>
                 <span>{data?.description}</span>
 
                 <form className='w-full flex flex-row px-4' onSubmit={handleSubmit}>
-                    <input value={comment} onChange={(e)=>setcomment(e.target.value)} type="text" className='w-full border-none bg-transparent p-1 outline-none text-gray-200' placeholder='Add a comment..' />
+                    <input value={comment} onChange={(e) => setcomment(e.target.value)} type="text" className='w-full border-none bg-transparent p-1 outline-none text-gray-200' placeholder='Add a comment..' />
                     <button type='submit'><IoMdSend size={25} /></button>
                 </form>
                 {
                     accordian ?
-                        <Comment postId={data._id}/>
+                        <Comment postId={data._id} />
                         :
                         ""
                 }
