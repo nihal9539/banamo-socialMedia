@@ -8,6 +8,8 @@ import { IoHomeOutline } from "react-icons/io5";
 import { FaUserGroup } from "react-icons/fa6";
 import { toast } from 'react-toastify';
 import NewPostModel from '../PostModel/NewPostModel';
+import { FaUserCircle } from "react-icons/fa";
+
 
 
 const Sidebar = () => {
@@ -35,7 +37,7 @@ const Sidebar = () => {
         setSideBar(!sideBar)
     }
     return (
-        <div className='bg-red p-1'>
+        <div className=' p-5'>
             <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden   focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                 <span className="sr-only">Open sidebar</span>
                 <svg onClick={handleside} className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +45,7 @@ const Sidebar = () => {
                 </svg>
             </button>
             {sideBar ? (<div className="w-full ">
-                <div className="h-full px-3 py-4 overflow-y-auto bg-red  ">
+                <div className="h-full px-3 py-4 overflow-y-auto   ">
                     <a href="https://flowbite.com/" className="flex items-center ps-2.5 mb-5">
                         <span className="self-center text-lg font-semibold whitespace-nowrap text-white">Task Managment System</span>
                     </a>
@@ -56,8 +58,8 @@ const Sidebar = () => {
                         </li>
                         <li>
                             <div onClick={HandleAddPost} className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group">
-                                <FaUserGroup size={30} />
-                                <span className="flex-1 ms-3 whitespace-nowrap">User</span>
+                                <FaUserCircle size={30} />
+                                <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
                             </div>
                         </li>
                         <li>
@@ -71,7 +73,7 @@ const Sidebar = () => {
                     </ul>
                 </div>
             </div>) :
-                <aside id="logo-sidebar" className="fixed bg-gray-700  top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+                <aside id="logo-sidebar" style={{background:"#161618"}} className="fixed  top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
                     <div className="h-full px-3 py-8  overflow-y-auto  ">
                         <div className="flex items-center ps-2.5 mb-5">
                             <span className="self-center text-lg font-semibold whitespace-nowrap dark:text-white">Social Media</span>
@@ -85,8 +87,8 @@ const Sidebar = () => {
                             </li>
                             <li>
                                 <div  className="flex items-center p-2 py-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 group">
-                                    <FaUserGroup size={30} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap">Users</span>
+                                    <FaUserCircle size={30} />
+                                    <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
                                 </div>
                             </li>
                             <li>

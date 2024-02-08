@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 const Layout = () => {
   return (
-    <div className=' '>
+    <div className='w-full h-full ' style={{background:"#0A0A0A"}}>
 
       <Sidebar/>
       <Outlet/>

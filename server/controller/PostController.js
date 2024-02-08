@@ -4,11 +4,22 @@ import PostModel from "../model/postModel.js";
 
 
 export const createPost = async (req, res) => {
-    const newPost = new PostModel(req.body);
-
+    const {image}  = req.body
+    console.log(req.body);
     try {
+        const newPost = new PostModel(req.body);
         await newPost.save()
         res.status(200).json(newPost)
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
+export const getAllPost = async (req, res) => {
+
+    try {
+        const post = await PostModel.find()
+        console.log(post);
+        res.status(200).json(post)
     } catch (error) {
         res.status(500).json(error.message)
     }
