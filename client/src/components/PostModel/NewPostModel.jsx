@@ -10,7 +10,6 @@ import { uploadPost } from '../../api/PostRequest';
 
 
 export default function NewPostModel({ modelOpne, setModelOpen , width}) {
-  console.log(width);
   const style = {
     position: 'absolute',
     top: '50%',
@@ -90,7 +89,9 @@ export default function NewPostModel({ modelOpne, setModelOpen , width}) {
             <hr color='black' className='mb-2' />
 
             {image ? <div>
-              <img src={image} className='h-72 w-full' alt="" />
+              <img src={image} className='h-72 w-full' alt=""  onClick={() => imgref.current.click()} />
+              <input type="file" ref={imgref} onChange={handleconvertToBase64} style={{ display: "none" }} />
+
               <input
                 className='border-none outline-none p-2 w-full my-2 text-black'
                 style={{ backgroundColor: "rgba(40, 52, 62, 0.07)" }}

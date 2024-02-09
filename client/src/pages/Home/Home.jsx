@@ -5,12 +5,16 @@ import Posts from '../../components/Posts/Posts'
 const Home = () => {
     const [post,setPost] =useState([])
     useEffect(()=>{
+       const getalldatas = ()=>{
         getAllPost().then((res)=>{
-            setPost(res.data)
-   
-        }).catch((err)=>{
-            console.log(err);
-        })
+          setPost(res.data)
+ 
+      }).catch((err)=>{
+          console.log(err);
+      })
+       }
+
+       getalldatas()
 
     },[])
   return (
