@@ -6,7 +6,7 @@ import CommentModel from "../model/commentModel.js";
  export const createComment = async (req, res) => {
     try {
         const { comment, postId ,userId} = req.body;
-        console.log(req.body);
+   
 
         // Create a new comment
         const comments = new CommentModel({

@@ -9,37 +9,50 @@ import { toast } from 'react-toastify';
 export default function ForgotPassword() {
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
-    const [emailOtp, setEmailOtp] = useState("")
+    const [data, setdata] = useState({
+        otp: "",
+        useremail: ""
+    })
     const [Otp, setOtp] = useState("")
 
 
     // Forgot password
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!emailOtp) {
+        if (!data.otp) {
             forgotPassword(email).then((res) => {
-                console.log(res.data);
-                setEmailOtp(res.data)
+
+                setdata({
+                    otp: res.data.otp,
+                    useremail: res.data.useremail,
+                })
                 setEmail("")
             }).catch((err) => {
                 console.log(err.message);
             })
-            
-        }else{
-            
+
+        } else {
+            if (Otp == data.otp) {
+                navigate(`/new-password`, { state: { useremail: data.useremail } })
+
+
+            } else {
+                toast.error("Wrong Otp")
+            }
+
         }
-       
+
 
     }
-console.log(Otp);
+
     return (
         <div className=" bg-[url(./assets/images/bg-2.jpg)]  w-full h-screen bg-cover relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-8 m-auto bg-transparent  rounded-md border-2 border-gray-400 backdrop-blur-md text-white md:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center  uppercase">
-                    {emailOtp ? "Enter OTP": "Forgott password"}
+                    {data.otp ? "Enter OTP" : "Forgott password"}
                 </h1>
                 <form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit} >
-                    {emailOtp ? <div className="mb-2">
+                    {data.otp ? <div className="mb-2">
                         <label
 
                             className="block text-sm font-semibold "

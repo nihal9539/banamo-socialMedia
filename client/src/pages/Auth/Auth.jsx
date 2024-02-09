@@ -34,7 +34,7 @@ export default function Auth() {
         e.preventDefault();
          if (signupform) {
             signup(data).then((res)=>{
-                console.log(res);
+         
                 localStorage.setItem('user',JSON.stringify(res.data))
                 window.location.replace('/')
                 
@@ -44,7 +44,6 @@ export default function Auth() {
             })
         }else{
             login(data).then((res)=>{
-                console.log(res);
                 localStorage.setItem('user',JSON.stringify(res.data))
                 window.location.replace('/')
 
@@ -59,7 +58,7 @@ export default function Auth() {
         <div className=" bg-[url(./assets/images/bg-2.jpg)]  w-full h-screen bg-cover relative flex flex-col justify-center min-h-screen overflow-hidden">
             <div className="w-full p-8 m-auto bg-transparent  rounded-md border-2 border-gray-400 backdrop-blur-md text-white md:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center  uppercase">
-                    Sign in
+                    {signupform ? "Sign Up" : "Log In"}
                 </h1>
                 <form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit} >
                     <div className="mb-2">
@@ -114,7 +113,7 @@ export default function Auth() {
 
                     <div className="mt-6">
                         <button type='submit' className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform  border rounded-md ">
-                            {signupform ? "Login" :"Sign Up"}
+                            {signupform ? "Sign Up": "Log in" }
                         </button>
                     </div>
                 </form>

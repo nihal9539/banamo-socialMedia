@@ -64,26 +64,23 @@ export const loginUser = async (req, res) => {
 
 
 export const forgotPassword = async (req, res) => {
-    const {email } = req.body
-   console.log(email);
-
-
+    const { email } = req.body
     try {
         const user = await UserModel.findOne({ email })
 
         if (!user) {
-            console.log("kooy");
+      
 
             res.status(400).json("user Not found")
-           
+
 
         } else {
-            console.log("hii");
+         var useremail = user.email
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: user.email,
-                    pass:"zrpzswhhgabfwkug"
+                    user: useremail,
+                    pass: "zrpzswhhgabfwkug"
                 }
             });
             var otp = Math.floor(1000 + Math.random() * 9000);
@@ -98,11 +95,11 @@ export const forgotPassword = async (req, res) => {
                 if (error) {
                     console.log(error);
                 } else {
-                   res.status(200).json(otp)
+                    res.status(200).json({otp,useremail})
                 }
             });
 
-          
+
         }
 
     } catch (error) {
@@ -111,4 +108,26 @@ export const forgotPassword = async (req, res) => {
     }
 
 
+}
+
+
+export const passwordChange = async (req, res) => {
+    const { email } = req.body;
+    const user = await UserModel.findOne({ email })
+    if (user) {
+        const salt = await bcypt.genSalt(10)
+        const hashPassword = await bcypt.hash(req.body.password, salt)
+        try {
+            await user.updateOne({ $set: {password:hashPassword} })
+            res.status(200).json("success")
+
+        } catch (error) {
+            res.status(500).json({ message: error.message })
+            console.log(error);
+        }
+    } else {
+        res.status(400).json("User Not found")
+
+
+    }
 }

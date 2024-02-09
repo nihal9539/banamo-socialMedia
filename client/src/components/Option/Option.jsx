@@ -3,13 +3,13 @@ import { deletePost } from '../../api/PostRequest';
 import EditPostModel from '../EditPostModel/EditPostModel';
 
 const Option = ({post}) => {
-    console.log(post);
+
     
    const [EditModelOen,setEditModelOpen] = useState(false)
 
     const handleDelete = ()=>{
         deletePost(post._id).then((res)=>{
-            console.log(res);
+         
             window.location.reload()
         }).catch((err)=>{
             console.log(err);

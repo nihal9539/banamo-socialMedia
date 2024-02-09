@@ -14,7 +14,7 @@ const UserPosts = () => {
         })
 
     },[])
-    console.log(post);
+
   return (
     <div className=' px-14 p-4 gap-6 sm:ml-64 h-screen overflow-scroll flex flex-col' >
     {post.length == 0 ?"": post.map((data,index)=>{

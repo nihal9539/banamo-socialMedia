@@ -49,7 +49,7 @@ const Posts = ({ data, options }) => {
 
     const handleLike =()=>{
         likePost(data._id,user.user._id).then((res)=>{
-            console.log(res.data.like);
+
             setlikes(res.data.like)
         }).catch((err)=>{
             console.log(err);
@@ -58,8 +58,7 @@ const Posts = ({ data, options }) => {
     }
 
 
-    console.log(likes);
-    console.log(likes.includes(user.user._id));
+   
    
 
     return (

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { getComments } from '../../api/CommentRequest'
 
 const Comment = ({ postId }) => {
-    console.log(postId)
     const [comments, setComments] = useState([])
 
     useEffect(() => {

@@ -16,7 +16,7 @@ export const getAllPost = async (req, res) => {
 
     try {
         const post = await PostModel.find()
-        console.log(post);
+
         res.status(200).json(post)
     } catch (error) {
         res.status(500).json(error.message)
@@ -65,7 +65,7 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
     const id = req.params.id
     const { userId } = req.body;
-    console.log(id,userId);
+
   
   
     try {

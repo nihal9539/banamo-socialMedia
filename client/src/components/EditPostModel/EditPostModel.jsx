@@ -21,7 +21,7 @@ const style = {
 };
 
 export default function NewPostModel({ modelOpne, setModelOpen, data }) {
-    console.log(data);
+    
 
     const handleClose = () => setModelOpen(false);
     const imgref = useRef()

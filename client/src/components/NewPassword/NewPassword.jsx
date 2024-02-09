@@ -1,13 +1,18 @@
 
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
+import { passwordChange } from '../../api/AuthRequest';
 
 
 
 export default function NewPassword() {
+
+    const location = useLocation()
     const navigate = useNavigate()
+  
+    const email = location.state.useremail
     const [data, setData] = useState({
         password: "",
         confirmPassword: ""
@@ -17,6 +22,23 @@ export default function NewPassword() {
     // New password
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (data.password === data.confirmPassword) {
+            
+            passwordChange(email,data.password).then((res)=>{
+         
+                toast.success("Password change successfully")
+                navigate('/auth')
+            }).catch((err)=>{
+                console.log(err.message);
+                toast.error(err.response.data)
+
+            })
+
+            
+        }else{
+            toast.error("password must be same")
+        }
 
 
         setData({

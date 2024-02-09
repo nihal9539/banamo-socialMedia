@@ -59,12 +59,13 @@ export default function NewPostModel({ modelOpne, setModelOpen }) {
       description: description,
       userId: user.user._id
     }
-    console.log(data);
+
     uploadPost(data).then((res) => {
-      console.log(res);
+
       setModelOpen(false)
       window.location.reload()
     }).catch((err) => {
+      
       console.log(err);
     })
   }
