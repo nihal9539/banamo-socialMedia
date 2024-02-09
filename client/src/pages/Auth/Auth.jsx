@@ -125,7 +125,7 @@ export default function Auth() {
                     <div onClick={handleformchange} className="mt-8 text-base font-normal text-white text-center ">
                        {signupform ? "Don't have an account?" : "Already have an account?" } 
                         <a  href="#"
-                            className="font-medium  hover:underline" > {signupform ? "Sign Up" :"Log In"}</a>
+                            className="font-medium  hover:underline" > {signupform ? "Log In" :"Sign Up" }</a>
                     </div>
             </div>
         </div>
