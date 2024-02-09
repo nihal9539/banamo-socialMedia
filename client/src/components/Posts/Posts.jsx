@@ -23,6 +23,7 @@ const Posts = ({ data, options }) => {
     const [accordian, setAccordian] = useState(false)
     const [comment, setcomment] = useState("")
     const [optionOpen, setOptionOpen] = useState("")
+    console.log(data);
 
 
 
@@ -48,7 +49,6 @@ const Posts = ({ data, options }) => {
             console.log(err);
         })
     }
-console.log(optionOpen);
 
     return (
         <div style={{ background: "#161618" }} className='w-11/12 p-6 self-center rounded-lg flex flex-col gap-4 justify-center bg-transparent backdrop-blur-lg text-white '>
@@ -63,8 +63,17 @@ console.log(optionOpen);
                             <LuSend size={28} />
                         </div>
                         <div>
-                            <SlOptionsVertical size={20} className='relative' onClick={(e)=>setOptionOpen(prev=>!prev)}/>
-                           {optionOpen ? <Option/> : ""}
+                            {
+                                options ?
+                                    <div>
+                                        <SlOptionsVertical size={20} className='relative' onClick={(e) => setOptionOpen(prev => !prev)} />
+                                        {
+                                            optionOpen
+                                                ?
+                                                <Option post={data} userId={user.user._id} />
+                                                : ""}
+                                    </div> : ""}
+
                         </div>
                     </div>
                     <p className='text-xs'>5 Likes</p></div>

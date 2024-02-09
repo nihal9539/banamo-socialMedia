@@ -23,7 +23,6 @@ export const getAllPost = async (req, res) => {
     }
 }
 export const getPost = async (req, res) => {
-    console.log("hii");
     const {id} = req.params
     console.log(req.params);
     try {
@@ -54,18 +53,12 @@ export const updatePost = async (req, res) => {
 }
 export const deletePost = async (req, res) => {
     const postId = req.params.id
-
-
+  console.log(req.body);
     try {
-        const { userId } = req.body;
         const post = await PostModel.findById(postId)
-        if (post.userId === userId) {
             await post.deleteOne()
             res.status(200).json("post delete")
-        } else {
-
-            res.status(403).json("Action for hidden")
-        }
+       
     } catch (error) {
         res.status(500).json(error.message)
     }
