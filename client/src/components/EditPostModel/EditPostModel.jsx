@@ -15,7 +15,6 @@ const style = {
     width: "35%",
     height: "68vh",
     bgcolor: 'background.paper',
-    //   border: '2px solid #000',
     borderRadius: "1rem",
     boxShadow: 24,
     p: 4,
@@ -58,7 +57,9 @@ export default function NewPostModel({ modelOpne, setModelOpen, data }) {
         }
         updatePost(postId, data).then((res) => {
             console.log(res);
+
             setModelOpen(false)
+            window.location.reload()
         }).catch((err) => {
             console.log(err);
         })

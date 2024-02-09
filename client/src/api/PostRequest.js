@@ -4,6 +4,8 @@ const API = axios.create({baseURL:"http://localhost:3000"})
 
 export const uploadPost = (data )=> API.post('/post',data)
 export const getAllPost = ()=> API.get(`/post`)
-export const getPost = (id)=> API.get(`/post/${id}`)
-export const deletePost = (postId)=> API.delete(`/post/${postId}`,userId)
+export const getUserPost = (id)=> API.get(`/post/${id}`)
+export const deletePost = (postId)=> API.delete(`/post/${postId}`)
 export const updatePost = (postId,userId)=> API.put(`/post/${postId}`,userId)
+export const likePost = (postId,userId)=> API.put(`/post/${postId}/like`,{userId})
+

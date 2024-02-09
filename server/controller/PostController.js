@@ -22,24 +22,19 @@ export const getAllPost = async (req, res) => {
         res.status(500).json(error.message)
     }
 }
-export const getPost = async (req, res) => {
+export const getUserPost = async (req, res) => {
     const {id} = req.params
-    console.log(req.params);
     try {
         const post = await PostModel.find({userId:id})
-        console.log(post);
         res.status(200).json(post)
     } catch (error) {
         res.status(500).json(error.message)
     }
 }
+
 export const updatePost = async (req, res) => {
     const { userId } = req.body;
     const postId = req.params.id
-    console.log(postId);
-    console.log(req.body);
-
-
     try {
         const post = await PostModel.findById(postId)
         if (post.userId === userId) {
@@ -55,7 +50,6 @@ export const updatePost = async (req, res) => {
 }
 export const deletePost = async (req, res) => {
     const postId = req.params.id
-  console.log(req.body);
     try {
         const post = await PostModel.findById(postId)
             await post.deleteOne()
@@ -71,6 +65,7 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
     const id = req.params.id
     const { userId } = req.body;
+    console.log(id,userId);
   
   
     try {
@@ -78,11 +73,11 @@ export const likePost = async (req, res) => {
       
         if (post.like.includes(userId)) {
             await post.updateOne({ $pull: { like: userId } });
-            res.status(200).json("Post disliked");
+            res.status(200).json(post);
         } else {
  
             await post.updateOne({ $push: { like: userId } });
-          res.status(200).json("Post liked");
+          res.status(200).json(post);
         }
       } catch (error) {
         res.status(500).json(error);

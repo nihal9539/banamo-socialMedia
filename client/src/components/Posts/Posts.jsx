@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import like from "../../assets/images/like.png"
 import liked from "../../assets/images/liked.png"
 import { FaRegComment } from 'react-icons/fa6'
@@ -13,6 +13,7 @@ import { createComment } from '../../api/CommentRequest';
 import Comment from '../Comment/Comment';
 import { SlOptionsVertical } from "react-icons/sl";
 import Option from '../Option/Option';
+import { likePost } from '../../api/PostRequest';
 
 
 
@@ -21,17 +22,13 @@ import Option from '../Option/Option';
 const Posts = ({ data, options }) => {
     const [liking, setLiking] = useState(false)
     const [accordian, setAccordian] = useState(false)
+    const [likes, setlikes] = useState([]);
+
     const [comment, setcomment] = useState("")
     const [optionOpen, setOptionOpen] = useState("")
-    console.log(data);
-
-
 
     const user = JSON.parse(localStorage.getItem('user'))
 
-    const handleLike = () => {
-        setLiking(!liking)
-    }
     const handleCommentOpen = () => {
         setAccordian(!accordian)
     }
@@ -50,6 +47,21 @@ const Posts = ({ data, options }) => {
         })
     }
 
+    const handleLike =()=>{
+        likePost(data._id,user.user._id).then((res)=>{
+            console.log(res.data.like);
+            setlikes(res.data.like)
+        }).catch((err)=>{
+            console.log(err);
+        })
+
+    }
+
+
+    console.log(likes);
+    console.log(likes.includes(user.user._id));
+   
+
     return (
         <div style={{ background: "#161618" }} className='w-11/12 p-6 self-center rounded-lg flex flex-col gap-4 justify-center bg-transparent backdrop-blur-lg text-white '>
             <img src={data.image} className='h-96 rounded-md border' width={"100%"} alt="" />
@@ -58,7 +70,7 @@ const Posts = ({ data, options }) => {
                 <div className='flex flex-col  items-start gap-1'>
                     <div className=' flex flex-row w-full pl-1 justify-between'>
                         <div className='flex flex-row gap-4'>
-                            <div onClick={handleLike}> {liking ? <FcLike size={28} /> : <FaRegHeart size={28} />} </div>
+                            <div onClick={handleLike}> {likes.includes(user.user._id) ? <FcLike size={28} /> : <FaRegHeart size={28} />} </div>
                             <BiCommentDetail onClick={handleCommentOpen} size={28} />
                             <LuSend size={28} />
                         </div>
@@ -76,7 +88,7 @@ const Posts = ({ data, options }) => {
 
                         </div>
                     </div>
-                    <p className='text-xs'>5 Likes</p></div>
+                    <p className='text-xs'>{likes.length} Likes</p></div>
                 <span>{data?.description}</span>
 
                 <form className='w-full flex flex-row px-4' onSubmit={handleSubmit}>

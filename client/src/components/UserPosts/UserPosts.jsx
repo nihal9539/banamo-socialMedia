@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAllPost, getPost } from '../../api/PostRequest'
+import { getUserPost } from '../../api/PostRequest'
 import Posts from '../Posts/Posts'
 
 const UserPosts = () => {
@@ -7,7 +7,7 @@ const UserPosts = () => {
 
     const [post,setPost] =useState([])
     useEffect(()=>{
-        getPost(user.user._id).then((res)=>{
+      getUserPost(user.user._id).then((res)=>{
             setPost(res.data)
         }).catch((err)=>{
             console.log(err);

@@ -19,6 +19,7 @@ export default function Auth() {
     // Forgot password
     
     const handleForgotPassword = ()=>{
+        navigate('/reset-password')
       
     }
     const handleformchange = ()=>{
