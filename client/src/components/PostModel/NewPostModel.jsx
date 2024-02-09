@@ -7,21 +7,23 @@ import { FaImages } from 'react-icons/fa6';
 import { GrFormPreviousLink } from "react-icons/gr";
 import { uploadPost } from '../../api/PostRequest';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: "35%",
-  height: "68vh",
-  bgcolor: 'background.paper',
-  //   border: '2px solid #000',
-  borderRadius: "1rem",
-  boxShadow: 24,
-  p: 4,
-};
 
-export default function NewPostModel({ modelOpne, setModelOpen }) {
+
+export default function NewPostModel({ modelOpne, setModelOpen , width}) {
+  console.log(width);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: `${width ? "90%" :"40%"}`,
+    height: "68vh",
+    bgcolor: 'background.paper',
+    //   border: '2px solid #000',
+    borderRadius: "1rem",
+    boxShadow: 24,
+    p: 4,
+  };
   const handleClose = () => setModelOpen(false);
   const imgref = useRef()
   const [imageBase64, setImageBase64] = useState("")

@@ -15,9 +15,9 @@ import { FaUserCircle } from "react-icons/fa";
 const Sidebar = () => {
     const navigate = useNavigate()
     const [sideBar, setSideBar] = useState(false)
+    const [fullWidth, setfullWidth] = useState(false)
 
     const [newpostModuleOpen,setNewPostModeuleOpen] = useState(false)
-
 
     const handleLogout = () => {
        localStorage.clear()
@@ -28,6 +28,14 @@ const Sidebar = () => {
     }
 
     const HandleAddPost = ()=>{
+        console.log("hiii");
+
+        setNewPostModeuleOpen(!newpostModuleOpen)
+    }
+    const HandleAddPostTwo = ()=>{
+       
+        setfullWidth(true)
+        console.log("hiii");
         setNewPostModeuleOpen(!newpostModuleOpen)
     }
 
@@ -36,6 +44,9 @@ const Sidebar = () => {
         navigate('/')
         setSideBar(!sideBar)
     }
+
+
+    
     return (
         <div className=' p-5'>
             <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden   focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -57,11 +68,17 @@ const Sidebar = () => {
                             </div>
                         </li>
                         <li>
-                            <div onClick={HandleAddPost} className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group">
-                                <FaUserCircle size={30} />
-                                <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
-                            </div>
-                        </li>
+                                <div onClick={() => navigate('/user')}  className="flex items-center p-2 py-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 group">
+                                    <FaUserCircle size={30} />
+                                    <span className="flex-1 ms-3 whitespace-nowrap">Profile</span>
+                                </div>
+                            </li>
+                        <li>
+                                <div onClick={HandleAddPostTwo}  className="flex items-center p-2 py-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 group">
+                                    <MdLibraryAdd size={30} />
+                                    <span className="flex-1 ms-3 whitespace-nowrap">New Post</span>
+                                </div>
+                            </li>
                         <li>
                             <div onClick={handleLogout} className="flex items-center p-2  rounded-lg text-white  hover:bg-gray-700 group">
                                 <TbLogout2 size={30} />
@@ -108,9 +125,9 @@ const Sidebar = () => {
 
                         </ul>
                     </div>
-                    <NewPostModel modelOpne={newpostModuleOpen} setModelOpen={setNewPostModeuleOpen}/>
                 </aside>
             }
+            <NewPostModel modelOpne={newpostModuleOpen} setModelOpen={setNewPostModeuleOpen} width={fullWidth}/>
         </div>
     )
 }
