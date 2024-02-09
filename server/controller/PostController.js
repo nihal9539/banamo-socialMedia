@@ -36,6 +36,8 @@ export const getPost = async (req, res) => {
 export const updatePost = async (req, res) => {
     const { userId } = req.body;
     const postId = req.params.id
+    console.log(postId);
+    console.log(req.body);
 
 
     try {

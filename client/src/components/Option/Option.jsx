@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { deletePost } from '../../api/PostRequest';
 import EditPostModel from '../EditPostModel/EditPostModel';
 
-const Option = ({post,userId}) => {
+const Option = ({post}) => {
     console.log(post);
     
    const [EditModelOen,setEditModelOpen] = useState(false)

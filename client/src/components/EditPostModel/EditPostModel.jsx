@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { FaImages } from 'react-icons/fa6';
 import { GrFormPreviousLink } from "react-icons/gr";
-import { uploadPost } from '../../api/PostRequest';
+import { updatePost, uploadPost } from '../../api/PostRequest';
 
 const style = {
     position: 'absolute',
@@ -22,6 +22,8 @@ const style = {
 };
 
 export default function NewPostModel({ modelOpne, setModelOpen, data }) {
+    console.log(data);
+
     const handleClose = () => setModelOpen(false);
     const imgref = useRef()
     const [imageBase64, setImageBase64] = useState("")
@@ -30,12 +32,6 @@ export default function NewPostModel({ modelOpne, setModelOpen, data }) {
 
     const user = JSON.parse(localStorage.getItem('user'))
 
-    const handleback = () => {
-        setDescription("")
-        setImage("")
-        setImageBase64("")
-
-    }
 
     const handleDescriptionChange = (event) => {
         setDescription(event.target.value);
@@ -53,17 +49,16 @@ export default function NewPostModel({ modelOpne, setModelOpen, data }) {
         }
     }
 
+    const postId = data._id
     const handleUploadImage = () => {
         const data = {
             image: imageBase64,
             description: description,
             userId: user.user._id
         }
-        console.log(data);
-        uploadPost(data).then((res) => {
+        updatePost(postId, data).then((res) => {
             console.log(res);
             setModelOpen(false)
-            window.location.reload()
         }).catch((err) => {
             console.log(err);
         })
@@ -90,10 +85,11 @@ export default function NewPostModel({ modelOpne, setModelOpen, data }) {
                         </div>
                         <hr color='black' className='mb-2' />
 
-                        {image ? <div onClick={() => imgref.current.click()}>
+                        {image ? <div>
                             <input type="file" ref={imgref} onChange={handleconvertToBase64} style={{ display: "none" }} />
 
-                            <img src={image} className='h-72 w-full' alt="" />
+                            <img src={image} onClick={() => imgref.current.click()}
+                                className='h-72 w-full' alt="" />
                             <input
                                 className='border-none outline-none p-2 w-full my-2 text-black'
                                 style={{ backgroundColor: "rgba(40, 52, 62, 0.07)" }}
